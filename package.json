@@ -1,0 +1,28 @@
+{
+  "name": "functional-data-type-checks",
+  "version": "0.0.1",
+  "description": "Type checking of functional data types",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Functional",
+    "Type Checks",
+    "Functional Programming",
+    "Type Checking",
+    "Runtime Checks",
+    "Test Assetion",
+    "Debugging",
+    "Category Theory",
+    "Natural Transformation",
+    "Monadic Type"
+  ],
+  "author": "Dan Mannock",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmannock/functional-data-type-checks.git"
+  }
+}
