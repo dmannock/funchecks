@@ -21,6 +21,23 @@ var SimpMonad = function(x) {
 	};
 }
 
+function prettyPrint(value) {
+	if (value && value.constructor === Array) {
+		return '[' + (value && value.toString()) + ']';
+	}
+	if (value instanceof Function) {
+		return value.toString();
+	}
+	if (!(value instanceof Object)) {
+		return value && value.toString();
+	}
+	var output = [];
+	for (var prop in value) {
+		output.push(prop + ': ' + prettyPrint(value[prop]));
+	}
+	return '{' + output.join(', ') + '}';
+}
+
 //INITIAL ASSERTIONS
 //essential early stage of tests before lib used
 function runTests(functionToTest, testValues) {
@@ -30,18 +47,17 @@ function runTests(functionToTest, testValues) {
 		var expected = testValues[key][1];
 		var result = functionToTest(value);
 		var isPass = result === expected;
-		var readableValue = (typeof value === 'object' ? JSON.stringify(value) : (value && value.toString()));
-		//TODO: better pretty print
-		//stringify doesn't preserve undefined props
+		var readableValue = prettyPrint(value)
 		if (isPass) {
 			console.log('PASS:' 
 				+ ' Result ' + result 
 				+ ' with object ' + readableValue
 			);
 		} else {
-			console.log('FAIL:' 
-				+ ' Result ' + result 
-				+ ' should equal expected ' + expected 
+			throw new Error('FAIL: ' 
+				+ functionToTest.name
+				+ ' result was ' + result 
+				+ ' expected it to be ' + expected 
 				+ ' with object ' + readableValue
 			);
 		}
@@ -58,7 +74,7 @@ var functorTestValues = [
 	[Infinity, false],
 	[-Infinity, false],
 	['badger', false],
-	[{}, false],
+	[{}, false], //check
 	[{another: function() {}}, false],
 	[{map: undefined}, false],
 	[{map: function() { }}, false],

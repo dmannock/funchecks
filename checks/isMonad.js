@@ -1,4 +1,4 @@
-var deepCompare = require("../compare");
+var deepCompare = require('../compare');
 
 //TODO:
 //this data type requires flexibility for naming
@@ -9,12 +9,18 @@ function id(x) {
 	return x;
 }
 
+var of = 'of';
+var chain = 'chain';
+//alternative call scenarios
+//#1: default name: chain
+//#2: aliases
+//#3: exhaustive check all
+var aliases = ['flatMap', 'bind'];
+
 function isMonad(obj) {
-	var of = "of";
-	var chain = "chain";
 	var guardChecks = !!(obj
-		&& typeof obj[of] === "function" //pointed functor check
-		&& typeof obj[chain] === "function"
+		&& typeof obj[of] === 'function' //pointed functor check
+		&& typeof obj[chain] === 'function'
 	);
 
 	if (!guardChecks) {

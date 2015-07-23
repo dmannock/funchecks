@@ -1,16 +1,16 @@
-var deepCompare = require("../compare");
+var deepCompare = require('../compare');
 
 function isFunctor(obj) {
 	function id(x) {
 		return x;
 	}
 	function f(x) {
-		return x + "1";
+		return x + '1';
 	}
 	function g(y) {
-		return y + "2";
+		return y + '2';
 	}
-	var guardChecks = !!(obj && typeof obj.map === "function")
+	var guardChecks = !!(obj && typeof obj.map === 'function')
 
 	if (!guardChecks) {
 		return false;
@@ -18,7 +18,7 @@ function isFunctor(obj) {
 
 	return !!(
 		deepCompare(obj.map(id), id(obj))		
-		&& deepCompare(obj.map(f).map(g), obj.map(x => g(f(x)))) //naive check for first assertion - relies on type coercion
+		&& deepCompare(obj.map(f).map(g), obj.map(function(x) { return g(f(x)); })) //naive check for first assertion - relies on type coercion
 	);
 }
 
