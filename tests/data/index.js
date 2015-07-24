@@ -6,18 +6,22 @@ var SimpFunctor = function(x) {
 	};
 }
 
-var SimpMonad = function(x) {
-	return {
-		chain: function(f) {
+function createMonad(chainName) {
+	return function SimpMonad(x) {
+		var obj = {
+			of: function(y) {
+				return SimpMonad(y);
+			}
+		};
+		obj[chainName] = function(f) {
 			return f(x);
-		},
-		of: function(y) {
-			return SimpMonad(y);
-		}
-	};
+		};
+		return obj;
+	}
 }
 
 module.exports = {
 	SimpFunctor: SimpFunctor,
-	SimpMonad: SimpMonad
+	SimpMonad: createMonad('chain'),
+	createMonad: createMonad
 }

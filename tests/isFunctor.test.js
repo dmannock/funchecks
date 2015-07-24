@@ -2,7 +2,7 @@ var runTests = require('./runTests');
 var testData = require('./data');
 var isFunctor = require('../checks/isFunctor');
 
-var functorTestValues = [
+var expected = [
 	[undefined, false],
 	[null, false],
 	[10, false],
@@ -21,4 +21,4 @@ var functorTestValues = [
 	[testData.SimpFunctor(10), true]
 ];
 
-runTests(isFunctor, functorTestValues);
+runTests(isFunctor, expected);

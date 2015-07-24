@@ -2,7 +2,7 @@ var runTests = require('./runTests');
 var testData = require('./data');
 var isMonad = require('../checks/isMonad');
 
-var monadTestValues = [
+var expected = [
 	[undefined, false],
 	[null, false],
 	[10, false],
@@ -20,7 +20,9 @@ var monadTestValues = [
 	[[], false],
 	[[1], false],
 	[[undefined], false],
-	[testData.SimpMonad(10), true]
+	[testData.SimpMonad(10), true],
+	[testData.createMonad('flatMap')('i\'m different'), true],
+	[testData.createMonad('bind')('i\'m also different but not prictical'), true],
 ];
 
-runTests(isMonad, monadTestValues);
+runTests(isMonad, expected);
