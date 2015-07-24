@@ -20,9 +20,16 @@ function prettyPrint(value) {
 function runTests(functionToTest, testValues) {
 	console.log(functionToTest.name + ' Tests:');
 	for (var key in testValues) {
-		var value = testValues[key][0];
-		var expected = testValues[key][1];
-		var result = functionToTest(value);
+		var type = testValues[key][0];
+		var value = testValues[key][1];
+		var expected = testValues[key][2];
+
+		if (!expected) {
+			expected = value;
+			value = type;
+		}
+
+		var result = functionToTest(type, value);
 		var isPass = result === expected;
 		var readableValue = prettyPrint(value)
 		if (isPass) {
@@ -39,6 +46,7 @@ function runTests(functionToTest, testValues) {
 			);
 		}
 	}
+	console.log(''); //empty line padding
 }
 
 module.exports = runTests;

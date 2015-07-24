@@ -1,8 +1,7 @@
 var runTests = require('./runTests');
 var testData = require('./data');
-var isSemigroup = require('../checks/isSemigroup');
+var isMonoid = require('../checks/isMonoid');
 
-//type?, obj, expected
 var expected = [
 	[undefined, false],
 	[null, false],
@@ -11,15 +10,15 @@ var expected = [
 	[NaN, false],
 	[Infinity, false],
 	[-Infinity, false],
-	['badger', true],
+	['badger', false],
 	[{}, false],
 	[{another: function() {}}, false],
 	[{concat: undefined}, false],
 	[{concat: function() { }}, false],
-	[[], true],
-	[[1], true],
-	[[undefined], true],
-	[testData.SimpSemigroup, testData.SimpSemigroup(10), true]
+	[[], false],
+	[[1], false],
+	[[undefined], false],
+	[testData.SimpMonoid, testData.SimpMonoid(10), true]
 ];
 
-runTests(isSemigroup, expected);
+runTests(isMonoid, expected);
