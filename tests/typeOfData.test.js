@@ -1,28 +1,11 @@
 var runTests = require('./runTests');
 var testData = require('./data');
-var isFunctor = require('../checks/isFunctor');
-var isMonad = require('../checks/isMonad');
+var dataTypes = require('../const/dataTypes');
+var typeOfData = require('../checks/typeOfData');
 
-var dataTypes = {
-	FUNCTOR: 'functor',
-	MONAD: 'monad'
-}
+//TODO: precedence of data types returned?
 
-var dataTypeFunctionMappings = {};
-dataTypeFunctionMappings[dataTypes.FUNCTOR] = isFunctor;
-dataTypeFunctionMappings[dataTypes.MONAD] = isMonad;
-
-function typeOfData(data) {
-	for (var typeName in dataTypeFunctionMappings) {
-		if (dataTypeFunctionMappings[typeName](data)) {
-			return typeName;
-		}
-	}
-	return typeof data;
-}
-
-//data type checks
-var typeOfDataTestValues = [
+var expected = [
 	[undefined, 'undefined'],
 	[null, 'object'],
 	[10, 'number'],
@@ -30,12 +13,11 @@ var typeOfDataTestValues = [
 	[NaN, 'number'],
 	[Infinity, 'number'],
 	[-Infinity, 'number'],
-	['badger', 'string'],
+	['badger', 'semigroup'],
 	[{}, 'object'],
 	[{another: function() {}}, 'object'],
 	[{map: undefined}, 'object'],
 	[{map: function() { }}, 'object'],
-	//functional data type checks
 	[[], dataTypes.FUNCTOR],
 	[[1], dataTypes.FUNCTOR],
 	[[undefined], dataTypes.FUNCTOR],
@@ -43,4 +25,4 @@ var typeOfDataTestValues = [
 	[testData.SimpMonad(10), dataTypes.MONAD]
 ];
 
-runTests(typeOfData, typeOfDataTestValues);
+runTests(typeOfData, expected);
