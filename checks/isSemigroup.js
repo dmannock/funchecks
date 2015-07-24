@@ -10,8 +10,15 @@ function isSemigroup(obj) {
 		return false;
 	}
 
+	var mCtor = obj.constructor;
+	if (!mCtor || !obj.concat(obj)) {
+		return false;
+	}
+	var m1 = new mCtor('a');
+	var m2 = new mCtor('b');
 	return !!(
-		deepCompare(obj.concat([]), obj) //should be monoid empty concatenated		
+		deepCompare(obj.concat(new mCtor()), obj) //should be monoid empty concatenated		
+		&& deepCompare(obj.concat(m1).concat(m2), obj.concat(m1.concat(m2)))
 	);
 }
 
