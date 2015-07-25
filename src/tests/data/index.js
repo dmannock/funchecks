@@ -28,12 +28,12 @@ SimpMonoid.empty = function() {
 function createMonad(chainName) {
 	return function SimpMonad(x) {
 		var obj = {
-			of: function(y) {
-				return SimpMonad(y);
-			}
+				of: function(y) {
+						return SimpMonad(y);
+				}
 		};
 		obj[chainName] = function(f) {
-			return f(x);
+				return f(x);
 		};
 		return obj;
 	}

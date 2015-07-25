@@ -4,15 +4,15 @@ var isSemigroup = require('../checks/isSemigroup');
 var isMonoid = require('../checks/isMonoid');
 var isMonad = require('../checks/isMonad');
 
-//TODO: manual requires, mappings & dataType consts atm
-//precedence? 
+//TODO: manual addition atm: requires, mappings & dataType consts
+//also, precedence? 
 var dataTypeFunctionMappings = {};
 dataTypeFunctionMappings[dataTypes.FUNCTOR] = isFunctor;
 dataTypeFunctionMappings[dataTypes.MONOID] = isMonoid;
 dataTypeFunctionMappings[dataTypes.SEMIGROUP] = isSemigroup;
 dataTypeFunctionMappings[dataTypes.MONAD] = isMonad;
 
-//data, optional type?
+//TODO: swap round - type is optional
 function typeOfData(type, data) {
 	for (var typeName in dataTypeFunctionMappings) {
 		if (dataTypeFunctionMappings[typeName](type, data)) {
@@ -20,6 +20,6 @@ function typeOfData(type, data) {
 		}
 	}
 	return typeof data;
-}
+};
 
 module.exports = typeOfData;

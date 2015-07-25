@@ -1,10 +1,8 @@
 # functional-data-type-checks
 
-Small, simple POC for type checking of functional data types. No dependencies, only xKB (TBC).
+Small, simple POC for type checking of functional data types. No dependencies, only xKB.
 
-## TODO ##
-
-## Features? ##
+## Features ##
 ### isFunctor 
 
 ### isMonad
