@@ -2,12 +2,12 @@ var deepCompare = require("../compare");
 var utils = require("../utils");
 
 module.exports = function isSemigroup(obj, type) {
-	if (!obj || !utils.isFunc(obj.concat)) {
+	if (!obj || !utils.isFn(obj.concat)) {
 		return false;
 	}
 
 	//TODO: this feels hacky - revisit
-	var mCtor = utils.getConstructor(type, obj);
+	var mCtor = utils.getCtor(type, obj);
 	if (!mCtor || !obj.concat(obj)) {
 		return false;
 	}

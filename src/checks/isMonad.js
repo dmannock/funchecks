@@ -12,8 +12,8 @@ var of = 'of';
 var chainAlisaes = ['chain', 'flatMap', 'bind'];
 
 function isMonadChain(obj, chainName) {
-	if (!utils.isFunc(obj[of]) //pointed functor check
-		|| !utils.isFunc(obj[chainName])) {
+	if (!utils.isFn(obj[of]) //pointed functor check
+		|| !utils.isFn(obj[chainName])) {
 		return false;
 	}
 

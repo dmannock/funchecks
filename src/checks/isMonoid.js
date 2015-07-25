@@ -6,7 +6,7 @@ module.exports = function isMonoid(obj, type) {
 	if (!obj 
 		|| !type
 		|| !type.empty
-		|| !utils.isFunc(type.empty)) {
+		|| !utils.isFn(type.empty)) {
 		return false;
 	}
 	var m = type('a');

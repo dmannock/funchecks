@@ -11,7 +11,7 @@ function g(y) {
 function isFunctor(obj) {
 	return !!(
 		obj
-		&& utils.isFunc(obj.map)
+		&& utils.isFn(obj.map)
 		&& deepCompare(obj.map(utils.id), utils.id(obj))		
 		&& deepCompare(obj.map(f).map(g), obj.map(function(x) { return g(f(x)); })) //naive check for first assertion - relies on type coercion
 	);

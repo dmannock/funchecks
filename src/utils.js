@@ -1,11 +1,11 @@
-module.exports.id = function id(x) {
+module.exports.id = function(x) {
 	return x;
 };
 
-module.exports.getConstructor = function getConstructor(type, obj) {
+module.exports.getCtor = function(type, obj) {
 	return 	typeof type === "function" ? type : obj.constructor;
 };
 
-module.exports.isFunc = function isFunc(fn) {
+module.exports.isFn = function(fn) {
 	return typeof fn === "function";
 };
