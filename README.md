@@ -1,11 +1,17 @@
-# funChecks (functional-data-type-checks)
+# funchecks (functional-data-type-checks)
 
-Small, simple POC for type checking of functional data types. No dependencies, only 3KB.
+Small, simple POC for type checking of functional data types. No production dependencies, only ~3KB (1.3KB gzipped).
 
 ## Dependencies ##
 - All you need is either node or a browser
 - Works on any machine
-- No dependencies on other packages (with the exception of dev dependencys to build for browsers)
+- No dependencies on other packages (with the exception of dev dependencies to build for browsers)
+
+## Potential uses
+
+* Unit testing
+* Debugging
+* Other assertions
 
 ## Features ##
 ### isFunctor (object -> boolean)
@@ -36,10 +42,10 @@ Return string is a constant that should be checked against funchecks.dataTypes
 
 Examples:
 ```js
-//string is a semigroup (returns true)
+//string is a semigroup
 funchecks.typeOfData('what am I?') === funchecks.dataTypes.SEMIGROUP;
 
-//array is a functor (returns true)
+//array is a functor
 funchecks.typeOfData([]) === funchecks.dataTypes.FUNCTOR;
 ```
 

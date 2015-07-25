@@ -1,5 +1,5 @@
 {
-  "name": "functional-data-type-checks",
+  "name": "funchecks",
   "version": "0.0.1",
   "description": "Type checking of functional data types",
   "main": "./src/index.js",
@@ -9,15 +9,15 @@
   },
   "scripts": {
     "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "browserify src/index.js --standalone funchecks > dist/bundle.js",
-    "build:prod": "browserify -p bundle-collapser/plugin src/index.js --standalone funchecks | uglifyjs -c -m -r 'require,exports'> dist/bundle.min.js",
+    "build:dev": "browserify src/index.js --standalone funchecks > dist/funchecks.js",
+    "build:prod": "browserify -p bundle-collapser/plugin src/index.js --standalone funchecks | uglifyjs -c -m -r 'require,exports'> dist/funchecks.min.js",
     "test": "node src/tests/"
   },
   "author": "Dan Mannock",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmannock/functional-data-type-checks.git"
+    "url": "https://github.com/dmannock/funchecks.git"
   },
   "keywords": [
     "Functional Data Type Checks",
