@@ -1,7 +1,7 @@
 var deepCompare = require("../compare");
 var utils = require("../utils");
 
-module.exports = function isSemigroup(type, obj) {
+module.exports = function isSemigroup(obj, type) {
 	if (!obj || !utils.isFunc(obj.concat)) {
 		return false;
 	}

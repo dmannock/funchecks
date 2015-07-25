@@ -13,9 +13,9 @@ dataTypeFunctionMappings[dataTypes.MONOID] = isMonoid;
 dataTypeFunctionMappings[dataTypes.SEMIGROUP] = isSemigroup;
 dataTypeFunctionMappings[dataTypes.MONAD] = isMonad;
 
-module.exports = function typeOfData(type, data) {
+module.exports = function typeOfData(data, type) {
 	for (var typeName in dataTypeFunctionMappings) {
-		if (dataTypeFunctionMappings[typeName](type, data)) {
+		if (dataTypeFunctionMappings[typeName](data, type)) {
 			return typeName;
 		}
 	}

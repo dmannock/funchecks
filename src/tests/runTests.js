@@ -28,11 +28,9 @@ function runTests(functionToTest, testValues) {
 			expected = value;
 			value = type;
 		}
-
-		var result = functionToTest(type, value);
-		var isPass = result === expected;
+		var result = functionToTest(value, type);
 		var readableValue = prettyPrint(value)
-		if (isPass) {
+		if (result === expected) {
 			console.log('PASS:' 
 				+ ' Result ' + result 
 				+ ' with object ' + readableValue
