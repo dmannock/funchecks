@@ -1,54 +1,46 @@
 
+function insOf(inst, val) {
+    return val instanceof inst;
+}
+
 //TODO: swap out after POC
+//credit to whoever did this
 //should use bare min needed or a lib really....
-function deepCompare (obj1, obj2) {
+module.exports = function(obj1, obj2) {
   var leftChain = [];
   var rightChain = [];
 
-  function innerCompare (x, y) {
+  return (function c(x, y) {
     // remember that NaN === NaN returns false
     // and isNaN(undefined) returns true
-    if (isNaN(x) && isNaN(y) && typeof x === 'number' && typeof y === 'number') {
+    if ((isNaN(x) && isNaN(y) && typeof x === 'number' && typeof y === 'number')
+        // Compare primitives and functions.     
+        // Check if both arguments link to the same object.
+        // Especially useful on the step where we compare prototypes
+        || x === y) {
          return true;
-    }
-
-    // Compare primitives and functions.     
-    // Check if both arguments link to the same object.
-    // Especially useful on the step where we compare prototypes
-    if (x === y) {
-        return true;
     }
 
     // Works in case when functions are created in constructor.
     // Comparing dates is a common scenario. Another built-ins?
     // We can even handle functions passed across iframes
     if ((typeof x === 'function' && typeof y === 'function') ||
-       (x instanceof Date && y instanceof Date) ||
-       (x instanceof RegExp && y instanceof RegExp) ||
-       (x instanceof String && y instanceof String) ||
-       (x instanceof Number && y instanceof Number)) {
+       (insOf(Date, x) && insOf(Date, y)) ||
+       (insOf(RegExp, x) && insOf(RegExp, y)) ||
+       (insOf(String, x) && insOf(String, y)) ||
+       (insOf(Number, x) && insOf(Number, y))) {
         return x.toString() === y.toString();
     }
 
     // At last checking prototypes as good as we can
-    if (!(x instanceof Object && y instanceof Object)) {
+    if (!(insOf(Object, x) && insOf(Object, y))) {
         return false;
     }
 
-    if (x.isPrototypeOf(y) || y.isPrototypeOf(x)) {
-        return false;
-    }
-
-    if (x.constructor !== y.constructor) {
-        return false;
-    }
-
-    if (x.prototype !== y.prototype) {
-        return false;
-    }
-
-    // Check for infinitive linking loops
-    if (leftChain.indexOf(x) > -1 || rightChain.indexOf(y) > -1) {
+    if (x.isPrototypeOf(y) || y.isPrototypeOf(x) 
+        || x.constructor !== y.constructor || x.prototype !== y.prototype
+        // last Check - for infinitive linking loops
+        || leftChain.indexOf(x) > -1 || rightChain.indexOf(y) > -1) {
          return false;
     }
 
@@ -58,31 +50,21 @@ function deepCompare (obj1, obj2) {
             return false;
         }
 
-        switch (typeof (x[p])) {
-            case 'object':
-            case 'function':
-                leftChain.push(x);
-                rightChain.push(y);
+        if (typeof (x[p]) === 'object' || typeof (x[p]) === 'function') {
+            leftChain.push(x);
+            rightChain.push(y);
 
-                if (!innerCompare (x[p], y[p])) {
-                    return false;
-                }
+            if (!c(x[p], y[p])) {
+                return false;
+            }
 
-                leftChain.pop();
-                rightChain.pop();
-                break;
-            default:
-                if (x[p] !== y[p]) {
-                    return false;
-                }
-                break;
+            leftChain.pop();
+            rightChain.pop();
+        } else if (x[p] !== y[p]) {
+            return false;
         }
     }
 
     return true;
-  }
-
-  return innerCompare(obj1, obj2);
-}
-
-module.exports = deepCompare;
+  })(obj1, obj2);
+};

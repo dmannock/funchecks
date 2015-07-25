@@ -13,8 +13,7 @@ dataTypeFunctionMappings[dataTypes.MONOID] = isMonoid;
 dataTypeFunctionMappings[dataTypes.SEMIGROUP] = isSemigroup;
 dataTypeFunctionMappings[dataTypes.MONAD] = isMonad;
 
-//TODO: swap round - type is optional
-function typeOfData(type, data) {
+module.exports = function typeOfData(type, data) {
 	for (var typeName in dataTypeFunctionMappings) {
 		if (dataTypeFunctionMappings[typeName](type, data)) {
 			return typeName;
@@ -22,5 +21,3 @@ function typeOfData(type, data) {
 	}
 	return typeof data;
 };
-
-module.exports = typeOfData;

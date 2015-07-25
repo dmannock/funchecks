@@ -25,10 +25,8 @@ function isMonadChain(obj, chainName) {
 	);
 }
 
-function isMonad(obj) {
+module.exports = function isMonad(obj) {
 	return !!obj && chainAlisaes.some(function(chainAlias) {
 		return isMonadChain(obj, chainAlias);
 	});
-}
-
-module.exports = isMonad;
+};

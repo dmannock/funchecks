@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm build:browser-dev & npm build:browser-prod",
     "build:browser-dev": "browserify src/index.js --standalone funChecks > dist/bundle.js",
-    "build:browser-prod": "browserify src/index.js --standalone funChecks | uglifyjs -c -m -r 'require,exports'> dist/bundle.min.js"
+    "build:browser-prod": "browserify -p bundle-collapser/plugin src/index.js --standalone funChecks | uglifyjs -c -m -r 'require,exports'> dist/bundle.min.js",
     "test": "node src/tests/"
   },
   "author": "Dan Mannock",
@@ -34,6 +34,7 @@
   ],
   "devDependencies": {
     "browserify": "^11.0.0",
+    "bundle-collapser": "^1.2.1",
     "uglify-js": "^2.4.23"
   }
 }

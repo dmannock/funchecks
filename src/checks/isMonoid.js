@@ -2,7 +2,7 @@ var deepCompare = require("../compare");
 var isSemigroup = require("./isSemigroup");
 var utils = require("../utils");
 
-function isMonoid(type, obj) {
+module.exports = function isMonoid(type, obj) {
 	if (!obj 
 		|| !type
 		|| !type.empty
@@ -16,5 +16,3 @@ function isMonoid(type, obj) {
 		&& deepCompare(type.empty().concat(m), m)  //should be monoid empty concatenated		
 	);
 };
-
-module.exports = isMonoid;
