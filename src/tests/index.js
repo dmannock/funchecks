@@ -5,6 +5,6 @@ require('./isMonoid.test');
 require('./isMonad.test');
 require('./typeOfData.test');
 
-//test runner in POC - assume succes sif we got here
+//test runner in POC - assume success if we got here
 console.log('===============All Tests Passed===============');
 

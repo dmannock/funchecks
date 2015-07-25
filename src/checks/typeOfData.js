@@ -7,6 +7,7 @@ var isMonad = require('../checks/isMonad');
 //TODO: manual addition atm: requires, mappings & dataType consts
 //also, precedence? 
 var dataTypeFunctionMappings = {};
+
 dataTypeFunctionMappings[dataTypes.FUNCTOR] = isFunctor;
 dataTypeFunctionMappings[dataTypes.MONOID] = isMonoid;
 dataTypeFunctionMappings[dataTypes.SEMIGROUP] = isSemigroup;

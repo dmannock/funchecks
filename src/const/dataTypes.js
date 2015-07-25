@@ -1,8 +1,6 @@
-var dataTypes = {
+module.exports = {
 	FUNCTOR: 'functor',
 	SEMIGROUP: 'semigroup',
 	MONOID: 'monoid',
 	MONAD: 'monad'
-}
-
-module.exports = dataTypes;
+};

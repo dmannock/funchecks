@@ -3,10 +3,24 @@
   "version": "0.0.1",
   "description": "Type checking of functional data types",
   "main": "./src/index.js",
+  "browser": "./src/index.js",
+  "engines": {
+    "node": ">=0.12.7"
+  },
   "scripts": {
-    "test": "node ./src/tests/"
+    "build": "npm build:browser-dev & npm build:browser-prod",
+    "build:browser-dev": "browserify src/index.js --standalone funChecks > dist/bundle.js",
+    "build:browser-prod": "browserify src/index.js --standalone funChecks | uglifyjs -c -m -r 'require,exports'> dist/bundle.min.js"
+    "test": "node src/tests/"
+  },
+  "author": "Dan Mannock",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmannock/functional-data-type-checks.git"
   },
   "keywords": [
+    "Functional Data Type Checks",
     "Functional",
     "Type Checks",
     "Functional Programming",
@@ -18,10 +32,8 @@
     "Natural Transformation",
     "Monadic Type"
   ],
-  "author": "Dan Mannock",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dmannock/functional-data-type-checks.git"
+  "devDependencies": {
+    "browserify": "^11.0.0",
+    "uglify-js": "^2.4.23"
   }
 }

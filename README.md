@@ -1,6 +1,8 @@
-# functional-data-type-checks
+# funChecks (functional-data-type-checks)
 
-Small, simple POC for type checking of functional data types. No dependencies, only xKB.
+Small, simple POC for type checking of functional data types. No dependencies, only xKB (TBC).
+
+## TODO ##
 
 ## Features ##
 ### isFunctor 
