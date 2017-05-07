@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Type checking of functional data types",
   "main": "./src/index.js",
-  "browser": "./src/index.js",
+  "browser": "./dist/funchecks.min.js",
   "engines": {
     "node": ">=0.12.7"
   },
